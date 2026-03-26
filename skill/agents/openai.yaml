@@ -1,0 +1,4 @@
+interface:
+  display_name: "Elite Code Review"
+  short_description: "High-signal diff-aware code review"
+  default_prompt: "Use $elite-code-review to review the current changes for correctness, contract drift, and regression risk."
