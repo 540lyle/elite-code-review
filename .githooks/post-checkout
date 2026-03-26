@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Sync skill files to .codex/ and .claude/ after checkout
 REPO_ROOT="$(git rev-parse --show-toplevel)"
-powershell.exe -ExecutionPolicy Bypass -File "$REPO_ROOT/sync-skills.ps1"
+command -v powershell.exe >/dev/null 2>&1 && powershell.exe -ExecutionPolicy Bypass -File "$REPO_ROOT/sync-skills.ps1"

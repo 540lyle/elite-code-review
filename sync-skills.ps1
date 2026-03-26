@@ -8,23 +8,14 @@ $targets = @('.codex', '.claude')
 
 foreach ($target in $targets) {
     $dest = "$RepoRoot\$target\skills\$SkillName"
+    New-Item -ItemType Directory -Force -Path $dest | Out-Null
 
-    # Create shared subdirectories
-    New-Item -ItemType Directory -Force -Path "$dest\examples" | Out-Null
-    New-Item -ItemType Directory -Force -Path "$dest\scripts"  | Out-Null
+    # Copy all skill content recursively
+    Copy-Item -Path "$Source\*" -Destination $dest -Recurse -Force
 
-    # Core skill file
-    Copy-Item "$Source\SKILL.md" -Destination $dest -Force
-
-    # Supporting files
-    Copy-Item "$Source\examples\strong_review.md" -Destination "$dest\examples" -Force
-    Copy-Item "$Source\examples\weak_review.md"   -Destination "$dest\examples" -Force
-    Copy-Item "$Source\scripts\detect_changes.sh"  -Destination "$dest\scripts"  -Force
-
-    # Codex-specific files
-    if ($target -eq '.codex') {
-        New-Item -ItemType Directory -Force -Path "$dest\agents" | Out-Null
-        Copy-Item "$Source\agents\openai.yaml" -Destination "$dest\agents" -Force
+    # Remove Codex-specific files from Claude target
+    if ($target -eq '.claude') {
+        Remove-Item -Path "$dest\agents" -Recurse -Force -ErrorAction SilentlyContinue
     }
 
     Write-Host "Synced -> $target/skills/$SkillName"

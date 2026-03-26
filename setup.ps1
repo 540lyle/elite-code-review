@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $RepoRoot = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 # Point git to the committed hooks directory
-git config core.hooksPath "$RepoRoot\.githooks"
+git config core.hooksPath '.githooks'
 Write-Host "Configured core.hooksPath -> .githooks"
 
 # Run initial skill sync

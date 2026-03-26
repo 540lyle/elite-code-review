@@ -48,7 +48,7 @@ The `.codex/skills/` and `.claude/skills/` directories are **gitignored** — th
 
 ### What `setup.ps1` Does
 
-1. Sets `core.hooksPath` to `.githooks/` so git uses the committed hooks
+1. Sets `core.hooksPath` to `.githooks` so git uses the committed hooks
 2. Runs `sync-skills.ps1` to perform the initial file distribution
 
 ### What `sync-skills.ps1` Does
@@ -85,5 +85,5 @@ To add a new tool that also uses `SKILL.md`:
 
 ### Requirements
 
-- Git for Windows
-- PowerShell 5.1+ (included with Windows 10/11)
+- Git
+- PowerShell 5.1+ (included with Windows 10/11) — required for sync; hooks silently no-op on non-Windows
